@@ -57,6 +57,8 @@ spec:
               name: cli-claim3
             - mountPath: /opt/gopath/src/github.com/fabcar/
               name: cli-fabcar
+            - mountPath: /var/run
+              name: dockersock
           workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
       restartPolicy: Always
       volumes:
@@ -79,3 +81,7 @@ spec:
         - name: cli-fabcar
           hostPath:
             path: /hostname/fabcar
+        - name: dockersock
+          hostPath: 
+            path: /var/run
+            type: Directory

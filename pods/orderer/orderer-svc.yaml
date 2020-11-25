@@ -28,7 +28,7 @@ spec:
   type: ClusterIP
   ports:
     - name: "orderer-metrics"
-      port: 8443
-      targetPort: 8443
+      port: 10443
+      targetPort: 10443
   selector:
     app: orderer 

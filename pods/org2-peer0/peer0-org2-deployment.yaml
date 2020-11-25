@@ -25,7 +25,7 @@ spec:
             - start
           env:
             - name: FABRIC_LOGGING_SPEC
-              value: INFO
+              value: DEBUG
             - name: CORE_PEER_ADDRESS
               value: peer0-org2:9051
             - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
@@ -52,22 +52,25 @@ spec:
               value: /etc/hyperledger/fabric/tls/ca.crt
             #- name: CORE_VM_ENDPOINT
             #  value: http://localhost:2375
+            - name: CORE_VM_ENDPOINT
+              value: tcp://docker:2375
             - name: CORE_PEER_LISTENADDRESS
               value: 0.0.0.0:9051
           image: hyperledger/fabric-peer:latest
           imagePullPolicy: Never
           name: peer0-org2
           ports:
+            - containerPort: 7051
             - containerPort: 9051
             - containerPort: 9052
             - containerPort: 9053
-            - containerPort: 10443
+            - containerPort: 12443
           volumeMounts:
             - mountPath: /etc/hyperledger/fabric/msp
               name: peer0-org2-claim1
             - mountPath: /etc/hyperledger/fabric/tls
               name: peer0-org2-claim2
-            - mountPath: /var/run
+            - mountPath: /var/run/docker.sock
               name: dockersock
       restartPolicy: Always
       volumes:
@@ -81,5 +84,4 @@ spec:
             type: Directory
         - name: dockersock
           hostPath: 
-            path: /var/run
-            type: Directory
+            path: /var/run/docker.sock

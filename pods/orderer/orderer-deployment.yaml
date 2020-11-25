@@ -23,9 +23,7 @@ spec:
             - orderer
           env:
             - name: FABRIC_LOGGING_SPEC
-              value: DEBUG
-            - name: ORDERER_GENERAL_LISTENADDRESS
-              value: 0.0.0.0
+              value: INFO
             - name: ORDERER_GENERAL_LISTENPORT
               value: "7050"
             - name: ORDERER_GENERAL_GENESISFILE
@@ -61,7 +59,7 @@ spec:
           name: orderer
           ports:
             - containerPort: 7050
-            - containerPort: 8443
+            - containerPort: 10443
           volumeMounts:
             - mountPath: /var/hyperledger/orderer/genesis.block
               name: orderer-claim0

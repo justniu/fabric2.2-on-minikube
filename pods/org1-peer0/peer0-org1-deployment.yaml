@@ -25,7 +25,7 @@ spec:
             - start
           env:
             - name: FABRIC_LOGGING_SPEC
-              value: INFO
+              value: DEBUG
             - name: CORE_PEER_ADDRESS
               value: peer0-org1:7051
             - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
@@ -55,8 +55,12 @@ spec:
               value: "true"
             #- name: CORE_VM_ENDPOINT
             #  value: http://localhost:2375
+            - name: CORE_VM_ENDPOINT   #重点是这里,接收到链码实例化请求，Peer向此地址的Docker发送启动链码容器命令/api调用
+              value: tcp://docker:2375
             - name: CORE_PEER_LISTENADDRESS
               value: 0.0.0.0:7051
+            - name: CORE_PEER_ADDRESSAUTODETECT
+              value: "true"
           image: hyperledger/fabric-peer:latest
           imagePullPolicy: Never
           name: peer0-org1
@@ -64,13 +68,13 @@ spec:
             - containerPort: 7051
             - containerPort: 7052
             - containerPort: 7053
-            - containerPort: 9443
+            - containerPort: 11443
           volumeMounts:
             - mountPath: /etc/hyperledger/fabric/msp
               name: peer0-org1-claim1
             - mountPath: /etc/hyperledger/fabric/tls
               name: peer0-org1-claim2
-            - mountPath: /var/run
+            - mountPath: /var/run/docker.sock
               name: dockersock
       restartPolicy: Always
       volumes:
@@ -84,5 +88,4 @@ spec:
             type: Directory
         - name: dockersock
           hostPath: 
-            path: /var/run
-            type: Directory
+            path: /var/run/docker.sock

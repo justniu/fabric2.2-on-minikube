@@ -1,0 +1,33 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: docker-pv
+  labels:
+    type: local
+    name: dockervolume
+  namespace: hyperledger
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/tmp-docker-pv"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: docker-pvc
+  namespace: hyperledger
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+  storageClassName: ""
+  selector:
+    matchLabels:
+      name: dockervolume
