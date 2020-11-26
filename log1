@@ -1,0 +1,52 @@
+Client:
+ Debug Mode: false
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 19.03.13
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Native Overlay Diff: true
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 8fba4e9a7d01810a393d5d25a3621dc101981175
+ runc version: dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ init version: fec3683
+ Security Options:
+  apparmor
+  seccomp
+   Profile: default
+ Kernel Version: 5.4.0-53-generic
+ Operating System: Alpine Linux v3.12 (containerized)
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 4
+ Total Memory: 6.723GiB
+ Name: c2151779c23a
+ ID: K4QZ:P5TR:5ZMX:IOBB:ZJSD:YUAJ:572R:CRPE:VGAC:JIZF:BOKQ:QMSW
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Registry Mirrors:
+  https://4y7mtmnv.mirror.aliyuncs.com/
+ Live Restore Enabled: false
+ Product License: Community Engine
+
+WARNING: No swap limit support

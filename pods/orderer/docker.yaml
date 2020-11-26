@@ -1,18 +1,53 @@
 ---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: docker-pv
+  labels:
+    type: local
+    name: dockervolume
+  namespace: hyperledger
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/tmp-docker-pv"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: docker-pvc
+  namespace: hyperledger
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+  storageClassName: ""
+  selector:
+    matchLabels:
+      name: dockervolume
+
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: docker
   labels:
     run: docker
+  name: docker
   namespace: hyperledger
 spec:
   selector:
     name: docker
   ports:
   - protocol: TCP
-    targetPort: 2375
-    port: 2375
+    targetPort: 2376
+    port: 2376
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,12 +70,13 @@ spec:
           claimName: docker-pvc
       containers:
       - name: docker
+        args: ["--registry-mirror=https://4y7mtmnv.mirror.aliyuncs.com"]
         securityContext:
           privileged: true
-        image: "docker:18.05.0-dind"
+        image: "docker:19.03.13-dind"
         imagePullPolicy: Never
         ports:
-        - containerPort: 2375
+        - containerPort: 2376
         volumeMounts:
         - mountPath: /var/lib/docker
           name: dockervolume
