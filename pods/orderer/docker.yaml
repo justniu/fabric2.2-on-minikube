@@ -73,7 +73,7 @@ spec:
         args: ["--registry-mirror=https://4y7mtmnv.mirror.aliyuncs.com", "--insecure-registry=http://192.168.92.151:5000"]
         securityContext:
           privileged: true
-        image: "docker:19.03.13-dind"
+        image: "docker:18.05.0-dind"
         imagePullPolicy: Never
         ports:
         - containerPort: 2375
