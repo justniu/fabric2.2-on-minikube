@@ -14,23 +14,7 @@ spec:
       targetPort: 9051
   selector:
     app: peer0-org2
----
---- #---------------- Peer0 org2 Service ---------------
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: peer0-org2
-  name: peer0-org2-chaincode
-  namespace: hyperledger
-spec:
-  type: ClusterIP
-  ports:
-    - name: "peer-chaincode"
-      port: 9052
-      targetPort: 9052
-  selector:
-    app: peer0-org2
+
 ---
 #---------------- Peer0 org2 Metrics Service ---------------
 apiVersion: v1

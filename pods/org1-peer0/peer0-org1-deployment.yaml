@@ -30,10 +30,10 @@ spec:
               value: peer0-org1:7051
             - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
               value: peer0-org1:7051
-            - name: CORE_PEER_CHAINCODELISTENADDRESS
-              value: 0.0.0.0:7052
-            - name: CORE_PEER_CHAINCODEADDRESS
-              value: peer0-org1:7052
+            #- name: CORE_PEER_CHAINCODELISTENADDRESS
+            #  value: 0.0.0.0:7052
+            #- name: CORE_PEER_CHAINCODEADDRESS
+            #  value: peer0-org1:7052
             - name: CORE_PEER_GOSSIP_BOOTSTRAP
               value: peer0-org1:7051
             - name: CORE_PEER_ID
@@ -66,7 +66,7 @@ spec:
           name: peer0-org1
           ports:
             - containerPort: 7051
-            - containerPort: 7052
+            #- containerPort: 7052
             - containerPort: 7053
             - containerPort: 11443
           volumeMounts:

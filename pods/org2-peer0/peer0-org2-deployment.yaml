@@ -32,10 +32,10 @@ spec:
               value: peer0-org2:9051
             - name: CORE_PEER_GOSSIP_BOOTSTRAP
               value: peer0-org2:9051
-            - name: CORE_PEER_CHAINCODELISTENADDRESS
-              value: 0.0.0.0:9052
-            - name: CORE_PEER_CHAINCODEADDRESS
-              value: peer0-org2:9052
+            #- name: CORE_PEER_CHAINCODELISTENADDRESS
+            #  value: 0.0.0.0:9052
+            #- name: CORE_PEER_CHAINCODEADDRESS
+            #  value: peer0-org2:9052
             - name: CORE_PEER_ID
               value: peer0-org2
             - name: CORE_PEER_LOCALMSPID
@@ -56,13 +56,15 @@ spec:
               value: tcp://docker:2375
             - name: CORE_PEER_LISTENADDRESS
               value: 0.0.0.0:9051
+            - name: CORE_PEER_ADDRESSAUTODETECT
+              value: "true"
           image: hyperledger/fabric-peer:latest
           imagePullPolicy: Never
           name: peer0-org2
           ports:
             - containerPort: 7051
             - containerPort: 9051
-            - containerPort: 9052
+            #- containerPort: 9052
             - containerPort: 9053
             - containerPort: 12443
           volumeMounts:
