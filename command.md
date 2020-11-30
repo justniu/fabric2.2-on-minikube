@@ -24,6 +24,45 @@ peer channel update -o orderer:7050 --ordererTLSHostnameOverride orderer -c mych
 peer channel update -o orderer:7050 --ordererTLSHostnameOverride orderer -c mychannel -f ./scripts/channel-artifacts/org2Anchors.tx --tls --cafile $ORDERER_CA
 
 
+peer lifecycle chaincode approveformyorg --channelID mychannel --name marbles --version 1.0 --package-id marbles:f32535c3a43820298354fd4870237e1c910acea03a168497d7ac67e1c6eb1dd0 --sequence 1 -o orderer:7050 --tls --cafile $ORDERER_CA 
+
+
+peer lifecycle chaincode checkcommitreadiness --channelID mychannel --name marbles --version 1.0 --sequence 1 -o -orderer:7050 --tls --cafile $ORDERER_CA 
+
+
+peer lifecycle chaincode approveformyorg --channelID mychannel --name marbles --version 1.0 --package-id marbles:cc621a9fe97e796b0f009a82597d70ee83ddf2b8b851fbccf130ffd9ec272736 --sequence 1 -o orderer:7050 --tls --cafile $ORDERER_CA 
+
+
+
+peer lifecycle chaincode commit -o orderer:7050 --ordererTLSHostnameOverride orderer --channelID mychannel --name marbles --version 1.0 --sequence 1 --tls --cafile $ORDERER_CA --peerAddresses peer0-org1:7051 --tlsRootCertFiles ${PWD}/crypto/peerOrganizations/org1/peers/peer0-org1/tls/ca.crt --peerAddresses peer0-org2:9051 --tlsRootCertFiles ${PWD}/crypto/peerOrganizations/org2/peers/peer0-org2/tls/ca.crt
+
+
+
+
+
+
+
+
+
+peer chaincode invoke -o orderer:7050 --tls true --cafile $ORDERER_CA -C mychannel -n marbles --peerAddresses 
+peer0-org1:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1/peers/peer0-org1/tls/ca.crt --peerAddresses peer
+0-org2:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2/peers/peer0-org2/tls/ca.crt -c '{"Args":["initMarble
+","marble1","blue","35","tom"]}' --waitForEvent
+
+
+
+peer chaincode invoke -o orderer:7050 --ordererTLSHostnameOverride orderer --tls --cafile $ORDERER_CA -C mychannel -n marbles --peerAddresses peer0-org1:7051 --tlsRootCertFiles ${PWD}/crypto/peerOrganizations/org1/peers/peer0-org1/tls/ca.crt --peerAddresses peer0-org2:9051 --tlsRootCertFiles ${PWD}/crypto/peerOrganizations/org2/peers/peer0-org2/tls/ca.crt -c '{"Args":["initMarble","marble1","blue","35","tom"]}' --waitForEvent
+
+
+
+
+
+
+
+
+
+
+
 ### without private data collections
 peer lifecycle chaincode package fabcar.tar.gz --path /opt/gopath/src/github.com/marbles/fabcar/go/ --lang golang --label fabcar_1
 

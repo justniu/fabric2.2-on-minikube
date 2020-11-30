@@ -74,6 +74,18 @@ spec:
               name: peer0-org2-claim2
             - mountPath: /var/run/docker.sock
               name: dockersock
+            - mountPath: /etc/hyperledger/fabric/core.yaml
+              name: builders-config
+              subPath: core.yaml
+            - mountPath: /builders/external/bin/detect
+              name: external-builder-detect
+              subPath: detect
+            - mountPath: /builders/external/bin/build
+              name: external-builder-build
+              subPath: build
+            - mountPath: /builders/external/bin/release
+              name: external-builder-release
+              subPath: release
       restartPolicy: Always
       volumes:
         - name: peer0-org2-claim1
@@ -87,3 +99,30 @@ spec:
         - name: dockersock
           hostPath: 
             path: /var/run/docker.sock
+        - name: builders-config
+          configMap:
+            name: builders-config
+            items:
+              - key: core.yaml
+                path: core.yaml
+        - name: external-builder-detect
+          configMap:
+            name: builders-config
+            items:
+              - key: detect
+                path: detect
+                mode: 0544
+        - name: external-builder-build
+          configMap:
+            name: builders-config
+            items:
+              - key: build
+                path: build
+                mode: 0544
+        - name: external-builder-release
+          configMap:
+            name: builders-config
+            items:
+              - key: release
+                path: release
+                mode: 0544
