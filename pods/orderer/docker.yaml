@@ -1,38 +1,4 @@
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: docker-pv
-  labels:
-    type: local
-    name: dockervolume
-  namespace: hyperledger
-spec:
-  capacity:
-    storage: 3Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/tmp-docker-pv"
-
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: docker-pvc
-  namespace: hyperledger
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 3Gi
-  storageClassName: ""
-  selector:
-    matchLabels:
-      name: dockervolume
-
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -66,11 +32,10 @@ spec:
     spec:
       volumes:
       - name: dockervolume
-        persistentVolumeClaim:
-          claimName: docker-pvc
+        emptyDir: {}
       containers:
       - name: docker
-        args: ["--registry-mirror=https://4y7mtmnv.mirror.aliyuncs.com", "--insecure-registry=http://192.168.92.151:5000"]
+        args: ["--registry-mirror=https://4y7mtmnv.mirror.aliyuncs.com", "--registry-mirror=https://registry.docker-cn.com", "--registry-mirror=https://registry.cn-hongkong.aliyuncs.com", "--insecure-registry=192.168.92.151:5000", "--dns=114.114.114.114", "--dns=8.8.8.8"]
         securityContext:
           privileged: true
         image: "docker:18.05.0-dind"

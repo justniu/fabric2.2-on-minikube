@@ -1,3 +1,7 @@
+### pull images
+docker pull 192.168.92.151:5000/fabric-ccenv:2.2.0
+docker tag 192.168.92.151:5000/fabric-ccenv:2.2.0 hyperledger/fabric-ccenv:2.2
+
 cryptogen generate --config=./crypto-config.yaml
 
 
