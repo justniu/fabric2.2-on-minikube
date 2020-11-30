@@ -33,9 +33,17 @@ spec:
       volumes:
       - name: dockervolume
         emptyDir: {}
+      dnsPolicy: "None"
+      dnsConfig:
+         nameservers:
+           - 61.139.2.69
+           - 192.168.1.235
+           - 10.96.0.10
+         searches:
+           - wifi.hengtu.com
       containers:
       - name: docker
-        args: ["--registry-mirror=https://4y7mtmnv.mirror.aliyuncs.com", "--registry-mirror=https://registry.docker-cn.com", "--registry-mirror=https://registry.cn-hongkong.aliyuncs.com", "--insecure-registry=192.168.92.151:5000", "--dns=114.114.114.114", "--dns=8.8.8.8"]
+        args: ["--registry-mirror=https://4y7mtmnv.mirror.aliyuncs.com", "--registry-mirror=https://registry.docker-cn.com", "--registry-mirror=https://registry.cn-hongkong.aliyuncs.com", "--insecure-registry=192.168.92.151:5000"]
         securityContext:
           privileged: true
         image: "docker:18.05.0-dind"
