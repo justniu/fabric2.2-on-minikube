@@ -55,8 +55,6 @@ spec:
               name: cli-claim2
             - mountPath: /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
               name: cli-claim3
-            - mountPath: /opt/gopath/src/github.com/fabcar/
-              name: cli-fabcar
             - mountPath: /var/run
               name: dockersock
           workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
@@ -78,9 +76,6 @@ spec:
           hostPath:
             path: /hostname/crypto-config
             type: Directory
-        - name: cli-fabcar
-          hostPath:
-            path: /hostname/fabcar
         - name: dockersock
           hostPath: 
             path: /var/run
